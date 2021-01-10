@@ -15,7 +15,7 @@ namespace TTC_Server
             Thread mainThread = new Thread(new ThreadStart(MainThread));
             mainThread.Start();
 
-            Server.Start(500, 713);
+            Server.Start(1200, 300, 713);
         }
 
         private static void MainThread()

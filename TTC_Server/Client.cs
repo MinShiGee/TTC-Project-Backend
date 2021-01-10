@@ -16,9 +16,12 @@ namespace TTC_Server
         public TCP tcp;
         public UDP udp;
 
+        public int joinedRoomId;
+
         public Client(int _clientId)
         {
             id = _clientId;
+            joinedRoomId = 0;
             tcp = new TCP(id);
             udp = new UDP(id);
         }
@@ -189,6 +192,26 @@ namespace TTC_Server
                 endPoint = null;
             }
         }
+
+        #region RoomEvents
+
+        public bool JoinRoom(int _roomId)
+        {
+
+            joinedRoomId = _roomId;
+
+            return true;
+        }
+
+        public bool LeaveRoom()
+        {
+
+            joinedRoomId = 0;
+
+            return true;
+        }
+
+        #endregion
 
         public void SendIntoGame(string _playerName)
         {

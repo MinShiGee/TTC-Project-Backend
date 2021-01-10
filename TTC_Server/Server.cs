@@ -9,17 +9,20 @@ namespace TTC_Server
     class Server
     {
         public static int MaxPlayers { get; private set; }
+        public static int MaxRooms { get; private set; }
         public static int Port { get; private set; }
         public static Dictionary<int, Client> clients = new Dictionary<int, Client>();
+        public static Dictionary<int, Room> rooms = new Dictionary<int, Room>();
         public delegate void PacketHandler(int _fromClient, Packet _packet);
         public static Dictionary<int, PacketHandler> packetHandlers;
 
         private static TcpListener tcpListener;
         private static UdpClient udpListener;
 
-        public static void Start(int _maxPlayers, int _port)
+        public static void Start(int _maxPlayers, int _maxRooms, int _port)
         {
             MaxPlayers = _maxPlayers;
+            MaxRooms = _maxRooms;
             Port = _port;
 
             Console.WriteLine("Starting server...");
@@ -113,6 +116,10 @@ namespace TTC_Server
             for (int i = 1; i <= MaxPlayers; i++)
             {
                 clients.Add(i, new Client(i));
+            }
+            for(int i = 1; i <= MaxRooms; i++)
+            {
+                rooms.Add(i, new Room(i, Constants.MAXROOMPLAYER));
             }
 
             packetHandlers = new Dictionary<int, PacketHandler>()
