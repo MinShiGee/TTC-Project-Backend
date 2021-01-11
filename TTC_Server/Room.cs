@@ -20,6 +20,11 @@ namespace TTC_Server
             InitRoom();
         }
 
+        public Dictionary<int, RoomPlayer> GetRoomPlayers()
+        {
+            return roomPlayers;
+        }
+
         public bool JoinPlayer(int _clientId)
         {
             for(int i = 1; i <= maxPlayerCount; i++)

@@ -18,6 +18,18 @@ namespace TTC_Server
             Server.clients[_toClient].udp.SendData(_packet);
         }
 
+        private static void SendTCPDataToRoom(int _roomId, Packet _packet)
+        {
+            _packet.WriteLength();
+            int roomMaxPlayers = Server.rooms[_roomId].maxPlayerCount;
+            var roomPlayers = Server.rooms[_roomId].GetRoomPlayers();
+
+            for (int i = 1; i <= roomMaxPlayers; i++)
+            {
+                Server.clients[roomPlayers[i].id].tcp.SendData(_packet);
+            }
+        }
+
         private static void SendTCPDataToAll(Packet _packet)
         {
             _packet.WriteLength();
@@ -26,6 +38,7 @@ namespace TTC_Server
                 Server.clients[i].tcp.SendData(_packet);
             }
         }
+
         private static void SendTCPDataToAll(int _exceptClient, Packet _packet)
         {
             _packet.WriteLength();
@@ -35,6 +48,18 @@ namespace TTC_Server
                 {
                     Server.clients[i].tcp.SendData(_packet);
                 }
+            }
+        }
+
+        private static void SendUDPDataToRoom(int _roomId, Packet _packet)
+        {
+            _packet.WriteLength();
+            int roomMaxPlayers = Server.rooms[_roomId].maxPlayerCount;
+            var roomPlayers = Server.rooms[_roomId].GetRoomPlayers();
+
+            for (int i = 1; i <= roomMaxPlayers; i++)
+            {
+                Server.clients[roomPlayers[i].id].udp.SendData(_packet);
             }
         }
 
@@ -55,6 +80,22 @@ namespace TTC_Server
                 {
                     Server.clients[i].udp.SendData(_packet);
                 }
+            }
+        }
+
+        private static void SendTCPDataToLobby(Packet _packet)
+        {
+            _packet.WriteLength();
+            for(int i = 1; i <= Server.MaxPlayers; i++)
+            {
+                if (Server.clients[i].tcp.socket == null)
+                    continue;
+
+                if (Server.clients[i].joinedRoomId != 0)
+                    continue;
+
+                Server.clients[i].tcp.SendData(_packet);
+
             }
         }
 
