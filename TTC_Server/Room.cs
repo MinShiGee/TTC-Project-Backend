@@ -7,6 +7,7 @@ namespace TTC_Server
     class Room
     {
         public int id { get; private set; }
+        public string name { get; private set; }
         public int ownerClientId { get; private set; }
 
         private Dictionary<int, RoomPlayer> roomPlayers = new Dictionary<int, RoomPlayer>();
@@ -33,8 +34,14 @@ namespace TTC_Server
                     continue;
 
                 bool isJoin = roomPlayers[i].JoinRoom(id, _clientId);
+
                 if (!isJoin)
                     return false;
+
+                curPlayerCount++;
+
+                if (ownerClientId == 0)
+                    ownerClientId = _clientId;
 
                 return true;
             }
@@ -43,7 +50,21 @@ namespace TTC_Server
 
         public void LeavePlayer(int _clientId)
         {
+            curPlayerCount--;
             roomPlayers[_clientId].LeaveRoom();
+
+            if(ownerClientId == _clientId)
+            {
+                ownerClientId = 0;
+                for(int i = 1; i <= maxPlayerCount; i++)
+                    if(roomPlayers[i].id != 0)
+                    {
+                        ownerClientId = roomPlayers[i].id;
+                        break;
+                    }
+            }
+
+            return;
         }
 
         private void InitRoom()

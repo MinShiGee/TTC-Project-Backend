@@ -71,6 +71,7 @@ namespace TTC_Server
                 Server.clients[i].udp.SendData(_packet);
             }
         }
+
         private static void SendUDPDataToAll(int _exceptClient, Packet _packet)
         {
             _packet.WriteLength();
@@ -95,7 +96,6 @@ namespace TTC_Server
                     continue;
 
                 Server.clients[i].tcp.SendData(_packet);
-
             }
         }
 
@@ -111,6 +111,12 @@ namespace TTC_Server
             }
         }
 
+        public static void SendRoomList()
+        {
+            SendTCPDataToLobby(Util.ChangeRoomPlayersToPacket());
+        }
+
+        #region Player(Spawn/Movement)
         public static void SpawnPlayer(int _toClient, Player _player)
         {
             using (Packet _packet = new Packet((int)ServerPackets.spawnPlayer))
@@ -145,6 +151,8 @@ namespace TTC_Server
                 SendUDPDataToAll(_player.id, _packet);
             }
         }
+        #endregion
+
         #endregion
     }
 }

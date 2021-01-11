@@ -11,7 +11,8 @@ namespace TTC_Server
         welcome = 1,
         spawnPlayer,
         playerPosition,
-        playerRotation
+        playerRotation,
+        roomList
     }
 
     /// <summary>Sent from client to server.</summary>

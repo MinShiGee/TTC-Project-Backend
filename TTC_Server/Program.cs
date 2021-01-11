@@ -9,13 +9,13 @@ namespace TTC_Server
 
         static void Main(string[] args)
         {
-            Console.Title = "TTC-GameServer";
+            Console.Title = Constants.SERVERNAME;
             isRunning = true;
 
             Thread mainThread = new Thread(new ThreadStart(MainThread));
             mainThread.Start();
 
-            Server.Start(1200, 300, 713);
+            Server.Start(Constants.MAXSERVERPLAYER, Constants.MAXROOMS, ServerInfo.PORT);
         }
 
         private static void MainThread()
