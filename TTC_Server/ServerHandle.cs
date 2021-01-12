@@ -33,5 +33,13 @@ namespace TTC_Server
 
             Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
         }
+
+        public static void RoomCreate(int _fromClient, Packet _packet)
+        {
+
+            int roomId = Util.GetEmptyRoomId();
+
+            return;
+        }
     }
 }

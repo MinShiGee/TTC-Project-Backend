@@ -12,7 +12,8 @@ namespace TTC_Server
         spawnPlayer,
         playerPosition,
         playerRotation,
-        roomList
+        roomList,
+        roomCreateStatus
     }
 
     /// <summary>Sent from client to server.</summary>
@@ -20,7 +21,7 @@ namespace TTC_Server
     {
         welcomeReceived = 1,
         playerMovement,
-        roomListReceived
+        roomCreate,
     }
 
     public class Packet : IDisposable
