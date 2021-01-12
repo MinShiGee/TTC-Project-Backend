@@ -113,7 +113,22 @@ namespace TTC_Server
 
         public static void SendRoomList()
         {
-            SendTCPDataToLobby(Util.ChangeRoomPlayersToPacket());
+            using (Packet _packet = new Packet((int)ServerPackets.roomList))
+            {
+                for (int i = 1; i <= Constants.MAXROOMS; i++)
+                {
+                    if (Server.rooms[i].ownerClientId == 0)
+                        continue;
+
+                    _packet.Write(Server.rooms[i].id);
+                    _packet.Write(Server.rooms[i].name);
+                    _packet.Write(Server.clients[Server.rooms[i].ownerClientId].userName);
+                    _packet.Write(Server.rooms[i].curPlayerCount);
+                    _packet.Write(Server.rooms[i].maxPlayerCount);
+                }
+
+                SendTCPDataToLobby(_packet);
+            }
         }
 
         #region Player(Spawn/Movement)

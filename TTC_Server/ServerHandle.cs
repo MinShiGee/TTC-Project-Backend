@@ -17,6 +17,8 @@ namespace TTC_Server
             {
                 Console.WriteLine($"Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
             }
+
+            Server.clients[_fromClient].userName = _username;
             //Server.clients[_fromClient].SendIntoGame(_username);
         }
 

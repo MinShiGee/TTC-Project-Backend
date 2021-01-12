@@ -19,7 +19,8 @@ namespace TTC_Server
     public enum ClientPackets
     {
         welcomeReceived = 1,
-        playerMovement
+        playerMovement,
+        roomListReceived
     }
 
     public class Packet : IDisposable

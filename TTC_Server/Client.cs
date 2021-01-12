@@ -12,6 +12,8 @@ namespace TTC_Server
         public static int dataBufferSize = 4096;
 
         public int id;
+        public string userName;
+
         public Player player;
         public TCP tcp;
         public UDP udp;
@@ -206,6 +208,7 @@ namespace TTC_Server
         public bool LeaveRoom()
         {
 
+            Server.rooms[joinedRoomId].LeavePlayer(id);
             joinedRoomId = 0;
 
             return true;
@@ -242,6 +245,8 @@ namespace TTC_Server
             Console.WriteLine($"{tcp.socket.Client.RemoteEndPoint} has disconnected.");
 
             player = null;
+
+            LeaveRoom();
 
             tcp.Disconnect();
             udp.Disconnect();

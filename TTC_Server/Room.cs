@@ -17,6 +17,7 @@ namespace TTC_Server
         public Room(int _id, int _maxPlayerCount)
         {
             id = _id;
+            name = "Empty Room";
             maxPlayerCount = _maxPlayerCount;
             InitRoom();
         }
@@ -51,9 +52,17 @@ namespace TTC_Server
         public void LeavePlayer(int _clientId)
         {
             curPlayerCount--;
-            roomPlayers[_clientId].LeaveRoom();
 
-            if(ownerClientId == _clientId)
+            for (int i = 1; i <= maxPlayerCount; i++)
+            {
+                if (_clientId == roomPlayers[i].id)
+                {
+                    roomPlayers[i].LeaveRoom();
+                    break;
+                }
+            }
+
+            if (ownerClientId == _clientId)
             {
                 ownerClientId = 0;
                 for(int i = 1; i <= maxPlayerCount; i++)
@@ -97,7 +106,6 @@ namespace TTC_Server
 
         public void LeaveRoom()
         {
-            Server.clients[id].LeaveRoom();
             isReady = false;
             id = 0;
         }
