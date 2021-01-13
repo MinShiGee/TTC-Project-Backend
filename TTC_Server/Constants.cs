@@ -14,5 +14,8 @@ namespace TTC_Server
 
         public const int TICKS_PER_SEC = 30;
         public const float MS_PER_TICK = 1000f / TICKS_PER_SEC;
+
+        public const int SEND_PER_SEC = 2;
+        public const float SEND_PER_TICK = 1000f / SEND_PER_SEC;
     }
 }

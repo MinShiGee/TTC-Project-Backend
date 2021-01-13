@@ -207,6 +207,8 @@ namespace TTC_Server
 
         public bool LeaveRoom()
         {
+            if (joinedRoomId == 0)
+                return true;
 
             Server.rooms[joinedRoomId].LeavePlayer(id);
             joinedRoomId = 0;

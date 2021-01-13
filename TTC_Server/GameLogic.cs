@@ -18,5 +18,10 @@ namespace TTC_Server
 
             ThreadManager.UpdateMain();
         }
+
+        public static void RoomListUpdate()
+        {
+            ServerSend.SendRoomList();
+        }
     }
 }

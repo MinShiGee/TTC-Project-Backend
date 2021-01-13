@@ -89,6 +89,7 @@ namespace TTC_Server
             _packet.WriteLength();
             for(int i = 1; i <= Server.MaxPlayers; i++)
             {
+
                 if (Server.clients[i].tcp.socket == null)
                     continue;
 
