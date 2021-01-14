@@ -41,12 +41,16 @@ namespace TTC_Server
             if(_roomId == 0)
             {
                 /* Send Failed Msg to Client */
+                
+
                 return;
             }
 
             Server.rooms[_roomId].JoinPlayer(_fromClient);
             
             /* Send Accept Msg to Client */
+
+
             return;
         }
     }

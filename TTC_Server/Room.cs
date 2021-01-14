@@ -52,7 +52,10 @@ namespace TTC_Server
                 curPlayerCount++;
 
                 if (ownerClientId == 0)
+                {
+                    Console.WriteLine($"(userName: {Server.clients[_clientId].userName}, clientId: {_clientId}) create Room. (roomid: {id}).");
                     ownerClientId = _clientId;
+                }
 
                 return true;
             }
