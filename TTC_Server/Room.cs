@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net;
 
 namespace TTC_Server
 {
@@ -25,6 +26,15 @@ namespace TTC_Server
         public Dictionary<int, RoomPlayer> GetRoomPlayers()
         {
             return roomPlayers;
+        }
+
+
+        public string GetAddress()
+        {
+            if (ownerClientId == 0)
+                return null;
+
+            return ((IPEndPoint)Server.clients[ownerClientId].tcp.socket.Client.LocalEndPoint).Address.ToString();
         }
 
         public bool JoinPlayer(int _clientId)

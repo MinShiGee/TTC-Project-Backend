@@ -176,6 +176,11 @@ namespace TTC_Server
             }
         }
 
+        public static void SendRoomCreateStatus()
+        {
+            /* code */
+        }
+
         #endregion
     }
 }

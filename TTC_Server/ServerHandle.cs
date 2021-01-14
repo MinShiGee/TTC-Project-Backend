@@ -19,7 +19,6 @@ namespace TTC_Server
             }
 
             Server.clients[_fromClient].userName = _username;
-            //Server.clients[_fromClient].SendIntoGame(_username);
         }
 
         public static void PlayerMovement(int _fromClient, Packet _packet)
@@ -37,10 +36,17 @@ namespace TTC_Server
         public static void RoomCreate(int _fromClient, Packet _packet)
         {
 
-            int roomId = Util.GetEmptyRoomId();
+            int _roomId = Util.GetEmptyRoomId();
 
-            /* code */
+            if(_roomId == 0)
+            {
+                /* Send Failed Msg to Client */
+                return;
+            }
 
+            Server.rooms[_roomId].JoinPlayer(_fromClient);
+            
+            /* Send Accept Msg to Client */
             return;
         }
     }
