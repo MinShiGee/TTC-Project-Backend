@@ -37,20 +37,16 @@ namespace TTC_Server
         {
 
             int _roomId = Util.GetEmptyRoomId();
-
+            bool isJoin = false;
             if(_roomId == 0)
             {
-                /* Send Failed Msg to Client */
-                
-
+                ServerSend.SendRoomCreateStatus(_fromClient, isJoin);
                 return;
             }
 
-            Server.rooms[_roomId].JoinPlayer(_fromClient);
-            
-            /* Send Accept Msg to Client */
+            isJoin = Server.rooms[_roomId].JoinPlayer(_fromClient);
 
-
+            ServerSend.SendRoomCreateStatus(_fromClient, isJoin);
             return;
         }
     }

@@ -176,9 +176,15 @@ namespace TTC_Server
             }
         }
 
-        public static void SendRoomCreateStatus()
+        public static void SendRoomCreateStatus(int _fromClient, bool isJoin)
         {
-            /* code */
+            using (Packet _packet = new Packet((int)ServerPackets.roomCreateStatus))
+            {
+
+                _packet.Write(isJoin);
+
+                SendTCPData(_fromClient, _packet);
+            }
         }
 
         #endregion
