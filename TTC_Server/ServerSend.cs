@@ -172,6 +172,8 @@ namespace TTC_Server
                     _packet.Write(Server.rooms[i].maxPlayerCount);
                 }
 
+                SendTCPData(1, _packet);
+                //For Test
                 SendTCPDataToLobby(_packet);
             }
         }
