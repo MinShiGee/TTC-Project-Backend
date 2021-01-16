@@ -153,6 +153,8 @@ namespace TTC_Server
         {
             using (Packet _packet = new Packet((int)ServerPackets.roomList))
             {
+
+                _packet.Write(Constants.MAXROOMS);
                 int _cnt = 0;
                 for (int i = 1; i <= Constants.MAXROOMS; i++)
                     if (Server.rooms[i].ownerClientId != 0)
