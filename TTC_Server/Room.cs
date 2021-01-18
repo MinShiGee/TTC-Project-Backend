@@ -15,6 +15,8 @@ namespace TTC_Server
         public int maxPlayerCount { get; private set; }
         public int curPlayerCount { get; private set; }
 
+        public bool isStart { get; private set; }
+
         public Room(int _id, int _maxPlayerCount)
         {
             id = _id;
@@ -27,7 +29,6 @@ namespace TTC_Server
         {
             return roomPlayers;
         }
-
 
         public string GetAddress()
         {

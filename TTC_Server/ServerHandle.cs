@@ -49,5 +49,21 @@ namespace TTC_Server
             ServerSend.SendRoomCreateStatus(_fromClient, isJoin);
             return;
         }
+
+        public static void RoomStartGame(int _fromClient, Packet packet)
+        {
+            if (Server.clients[_fromClient].joinedRoomId == 0)
+            {
+
+                /* Send Error to Client Code */
+
+                return;
+            }
+
+            /* Room Start Game Code */
+
+        }
+
     }
+
 }

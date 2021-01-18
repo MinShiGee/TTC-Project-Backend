@@ -22,6 +22,7 @@ namespace TTC_Server
         welcomeReceived = 1,
         playerMovement,
         roomCreate,
+        roomStartGame
     }
 
     public class Packet : IDisposable
