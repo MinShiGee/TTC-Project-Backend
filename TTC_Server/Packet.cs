@@ -13,7 +13,8 @@ namespace TTC_Server
         playerPosition,
         playerRotation,
         roomList,
-        roomCreateStatus
+        roomCreateStatus,
+        lobbyChatMessage
     }
 
     /// <summary>Sent from client to server.</summary>
@@ -22,6 +23,7 @@ namespace TTC_Server
         welcomeReceived = 1,
         playerMovement,
         roomCreate,
+        lobbyChatMessage,
         roomStartGame
     }
 

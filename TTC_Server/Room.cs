@@ -30,6 +30,11 @@ namespace TTC_Server
             return roomPlayers;
         }
 
+        public void SetRoom(string _name, bool _isPrivate, string _password)
+        {
+            name = _name;
+        }
+
         public string GetAddress()
         {
             if (ownerClientId == 0)

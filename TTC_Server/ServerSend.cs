@@ -149,6 +149,7 @@ namespace TTC_Server
         }
         #endregion
 
+        #region Room List Update
         public static void SendRoomList()
         {
             using (Packet _packet = new Packet((int)ServerPackets.roomList))
@@ -173,13 +174,13 @@ namespace TTC_Server
                     _packet.Write(Server.rooms[i].curPlayerCount);
                     _packet.Write(Server.rooms[i].maxPlayerCount);
                 }
-
-                SendTCPData(1, _packet);
-                //For Test
-                SendTCPDataToLobby(_packet);
+ 
+               SendTCPDataToLobby(_packet);
             }
         }
+        #endregion
 
+        #region Room Create Status
         public static void SendRoomCreateStatus(int _fromClient, bool isJoin)
         {
             using (Packet _packet = new Packet((int)ServerPackets.roomCreateStatus))
@@ -190,7 +191,19 @@ namespace TTC_Server
                 SendTCPData(_fromClient, _packet);
             }
         }
+        #endregion
 
+        public static void LobbyChatMessage(int _fromClient, string _msg)
+        {
+            using (Packet _packet = new Packet((int)ServerPackets.lobbyChatMessage))
+            {
+                string _str = "<color=#00f500>" + Server.clients[_fromClient].userName + "</color>" + ": " + _msg;
+                _packet.Write(_str);
+
+                SendTCPDataToLobby(_packet);
+            }
+            return;
+        }
         #endregion
     }
 }
