@@ -204,6 +204,18 @@ namespace TTC_Server
             }
             return;
         }
+
+        public static void LobbyServerMessage(string _msg)
+        {
+            using (Packet _packet = new Packet((int)ServerPackets.lobbyServerMessage))
+            {
+                _packet.Write(_msg);
+
+                SendTCPDataToLobby(_packet);
+            }
+            return;
+        }
+
         #endregion
     }
 }

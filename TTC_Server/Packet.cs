@@ -14,7 +14,8 @@ namespace TTC_Server
         playerRotation,
         roomList,
         roomCreateStatus,
-        lobbyChatMessage
+        lobbyChatMessage,
+        lobbyServerMessage
     }
 
     /// <summary>Sent from client to server.</summary>

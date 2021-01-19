@@ -54,6 +54,7 @@ namespace TTC_Server
             if (isJoin)
             {
                 Server.rooms[_roomId].SetRoom(_name, _isPrivate, _password);
+                Console.WriteLine($"(userName: {Server.clients[_fromClient].userName}, clientId: {_fromClient}) create Room. (roomid: {_roomId}, roomName: {_name}).");
             }
             ServerSend.SendRoomCreateStatus(_fromClient, isJoin);
             return;

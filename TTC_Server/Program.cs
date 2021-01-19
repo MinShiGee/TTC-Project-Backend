@@ -19,6 +19,28 @@ namespace TTC_Server
             lobbyThread.Start();
 
             Server.Start(Constants.MAXSERVERPLAYER, Constants.MAXROOMS, ServerInfo.PORT);
+
+            string _input;
+            do
+            {
+                _input = Console.ReadLine();
+                string[] _str = _input.Split(' ');
+
+                switch (_str[0])
+                {
+                    case "say":
+                        string _msg = String.Empty;
+                        for (int i = 1; i < _str.Length; i++)
+                            _msg += _str[i] + " ";
+                        ServerSend.LobbyServerMessage(_msg);
+                        break;
+
+                    default:
+                        break;
+                }
+
+            } while (true);
+
         }
 
         private static void MainThread()
