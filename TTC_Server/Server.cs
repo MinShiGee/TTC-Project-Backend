@@ -128,6 +128,7 @@ namespace TTC_Server
                 { (int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
                 { (int)ClientPackets.roomCreate, ServerHandle.RoomCreate},
                 { (int)ClientPackets.lobbyChatMessage, ServerHandle.LobbyChatMessage},
+                { (int)ClientPackets.roomChatMessage, ServerHandle.RoomChatMessage},
                 { (int)ClientPackets.roomStartGame, ServerHandle.RoomStartGame}
             };
             Console.WriteLine("Initialized packets.");

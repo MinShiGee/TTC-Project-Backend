@@ -66,8 +66,20 @@ namespace TTC_Server
             if (_msg.Length < 1)
                 return;
             ServerSend.LobbyChatMessage(_fromClient, _msg);
+            return;
         }
+
         //5
+        public static void RoomChatMessage(int _fromClient, Packet _packet)
+        {
+            string _msg = _packet.ReadString();
+            if (_msg.Length < 1)
+                return;
+            ServerSend.RoomChatMessage(_fromClient, _msg);
+            return;
+        }
+
+        //6
         public static void RoomStartGame(int _fromClient, Packet packet)
         {
             if (Server.clients[_fromClient].joinedRoomId == 0)

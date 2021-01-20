@@ -6,6 +6,7 @@ namespace TTC_Server
 {
     class ServerSend
     {
+        #region Send Packet
         private static void SendTCPData(int _toClient, Packet _packet)
         {
             _packet.WriteLength();
@@ -20,12 +21,17 @@ namespace TTC_Server
 
         private static void SendTCPDataToRoom(int _roomId, Packet _packet)
         {
+            if (_roomId == 0)
+                return;
+
             _packet.WriteLength();
             int roomMaxPlayers = Server.rooms[_roomId].maxPlayerCount;
             var roomPlayers = Server.rooms[_roomId].GetRoomPlayers();
 
             for (int i = 1; i <= roomMaxPlayers; i++)
             {
+                if (roomPlayers[i].id == 0)
+                    continue;
                 Server.clients[roomPlayers[i].id].tcp.SendData(_packet);
             }
         }
@@ -80,7 +86,7 @@ namespace TTC_Server
                 if (i != _exceptClient)
                 {
                     Server.clients[i].udp.SendData(_packet);
-                }
+                } 
             }
         }
 
@@ -99,6 +105,7 @@ namespace TTC_Server
                 Server.clients[i].tcp.SendData(_packet);
             }
         }
+        #endregion
 
         #region Packets
         public static void Welcome(int _toClient, string _msg)
@@ -215,7 +222,17 @@ namespace TTC_Server
             }
             return;
         }
+        public static void RoomChatMessage(int _fromClient, string _msg)
+        {
+            using (Packet _packet = new Packet((int)ServerPackets.roomChatMessage))
+            {
+                string _str = "<color=#00f500>" + Server.clients[_fromClient].userName + "</color>" + ": " + _msg;
+                _packet.Write(_str);
 
+                SendTCPDataToRoom(Server.clients[_fromClient].joinedRoomId, _packet);
+            }
+            return;
+        }
         #endregion
     }
 }
