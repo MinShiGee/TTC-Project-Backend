@@ -21,6 +21,7 @@ namespace TTC_Server
 
             Server.clients[_fromClient].userName = _username;
         }
+
         //2
         public static void PlayerMovement(int _fromClient, Packet _packet)
         {
@@ -33,6 +34,7 @@ namespace TTC_Server
 
             Server.clients[_fromClient].player.SetInput(_inputs, _rotation);
         }
+
         //3
         public static void RoomCreate(int _fromClient, Packet _packet)
         {
@@ -59,6 +61,7 @@ namespace TTC_Server
             ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
             return;
         }
+
         public static void RoomJoin(int _fromClient, Packet _packet)
         {
             int _roomId = _packet.ReadInt();
@@ -66,16 +69,26 @@ namespace TTC_Server
 
             if (_roomId == 0)
             {
-                for(int i = 1; i<= Constants.MAXROOMS; i++)
+                foreach(KeyValuePair<int, Room> item in Server.rooms)
                 {
-                    /* Find and Join Empty Room*/
+                    if (item.Value.isStart == true)
+                        continue;
+                    if (item.Value.curPlayerCount == 0)
+                        continue;
+                    if (item.Value.maxPlayerCount <= item.Value.curPlayerCount)
+                        continue;
+
+                    isJoin = Server.rooms[item.Key].JoinPlayer(_fromClient);
+                    break;
                 }
+                ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
                 return;
             }
             isJoin = Server.rooms[_roomId].JoinPlayer(_fromClient);
             ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
             return;
         }
+
         //4
         public static void LobbyChatMessage(int _fromClient, Packet _packet)
         {
