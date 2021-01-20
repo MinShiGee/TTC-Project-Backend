@@ -188,9 +188,9 @@ namespace TTC_Server
         #endregion
 
         #region Room Create Status
-        public static void SendRoomCreateStatus(int _fromClient, bool isJoin)
+        public static void SendRoomJoinStatus(int _fromClient, bool isJoin)
         {
-            using (Packet _packet = new Packet((int)ServerPackets.roomCreateStatus))
+            using (Packet _packet = new Packet((int)ServerPackets.roomJoinStatus))
             {
 
                 _packet.Write(isJoin);

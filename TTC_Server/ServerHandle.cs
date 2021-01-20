@@ -46,7 +46,7 @@ namespace TTC_Server
 
             if(_roomId == 0)
             {
-                ServerSend.SendRoomCreateStatus(_fromClient, isJoin);
+                ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
                 return;
             }
 
@@ -56,7 +56,24 @@ namespace TTC_Server
                 Server.rooms[_roomId].SetRoom(_name, _isPrivate, _password);
                 Console.WriteLine($"(userName: {Server.clients[_fromClient].userName}, clientId: {_fromClient}) create Room. (roomid: {_roomId}, roomName: {_name}).");
             }
-            ServerSend.SendRoomCreateStatus(_fromClient, isJoin);
+            ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
+            return;
+        }
+        public static void RoomJoin(int _fromClient, Packet _packet)
+        {
+            int _roomId = _packet.ReadInt();
+            bool isJoin = false;
+
+            if (_roomId == 0)
+            {
+                for(int i = 1; i<= Constants.MAXROOMS; i++)
+                {
+                    /* Find and Join Empty Room*/
+                }
+                return;
+            }
+            isJoin = Server.rooms[_roomId].JoinPlayer(_fromClient);
+            ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
             return;
         }
         //4

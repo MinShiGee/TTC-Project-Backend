@@ -13,7 +13,7 @@ namespace TTC_Server
         playerPosition,
         playerRotation,
         roomList,
-        roomCreateStatus,
+        roomJoinStatus,
         lobbyChatMessage,
         lobbyServerMessage,
         roomChatMessage
@@ -25,6 +25,7 @@ namespace TTC_Server
         welcomeReceived = 1,
         playerMovement,
         roomCreate,
+        roomJoin,
         lobbyChatMessage,
         roomChatMessage,
         roomStartGame

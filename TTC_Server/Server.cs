@@ -127,6 +127,7 @@ namespace TTC_Server
                 { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
                 { (int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
                 { (int)ClientPackets.roomCreate, ServerHandle.RoomCreate},
+                { (int)ClientPackets.roomJoin, ServerHandle.RoomJoin},
                 { (int)ClientPackets.lobbyChatMessage, ServerHandle.LobbyChatMessage},
                 { (int)ClientPackets.roomChatMessage, ServerHandle.RoomChatMessage},
                 { (int)ClientPackets.roomStartGame, ServerHandle.RoomStartGame}
