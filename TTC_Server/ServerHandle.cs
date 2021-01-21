@@ -67,6 +67,12 @@ namespace TTC_Server
             int _roomId = _packet.ReadInt();
             bool isJoin = false;
 
+            if(_roomId == -1)
+            {
+                Server.clients[_fromClient].LeaveRoom();
+                return;
+            }
+
             if (_roomId == 0)
             {
                 foreach(KeyValuePair<int, Room> item in Server.rooms)
