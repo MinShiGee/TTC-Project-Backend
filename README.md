@@ -1,5 +1,5 @@
-# TTC-Project-Backend
-Unity 3d Project - Backend Code
+# TTC-Project-Socket Server
+Unity 3d Project - Server Code
 
 framework: .net core
 
