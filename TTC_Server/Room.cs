@@ -17,6 +17,9 @@ namespace TTC_Server
 
         public bool isStart { get; private set; }
 
+        public bool isPrivate = false;
+        public string password = default;
+
         public Room(int _id, int _maxPlayerCount)
         {
             id = _id;
@@ -33,6 +36,14 @@ namespace TTC_Server
         public void SetRoom(string _name, bool _isPrivate, string _password)
         {
             name = _name;
+            isPrivate = _isPrivate;
+            password = _password;
+
+            if(isPrivate && password.Length < 2)
+            {
+                isPrivate = false;
+                password = string.Empty;
+            }
         }
 
         public string GetAddress()

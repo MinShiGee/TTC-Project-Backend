@@ -180,6 +180,7 @@ namespace TTC_Server
                     _packet.Write(Server.clients[Server.rooms[i].ownerClientId].userName);
                     _packet.Write(Server.rooms[i].curPlayerCount);
                     _packet.Write(Server.rooms[i].maxPlayerCount);
+                    _packet.Write(Server.rooms[i].isPrivate);
                 }
  
                SendTCPDataToLobby(_packet);
@@ -226,10 +227,16 @@ namespace TTC_Server
         {
             using (Packet _packet = new Packet((int)ServerPackets.roomChatMessage))
             {
-                string _str = "<color=#00f500>" + Server.clients[_fromClient].userName + "</color>" + ": " + _msg;
+                int _roomId = Server.clients[_fromClient].joinedRoomId;
+                string _str = " ";
+
+                if (Server.rooms[_roomId].ownerClientId == _fromClient)
+                    _str += "[Owner] ";
+
+                _str += "<color=#00f500>" + Server.clients[_fromClient].userName + "</color>" + ": " + _msg;
                 _packet.Write(_str);
 
-                SendTCPDataToRoom(Server.clients[_fromClient].joinedRoomId, _packet);
+                SendTCPDataToRoom(_roomId, _packet);
             }
             return;
         }

@@ -38,7 +38,6 @@ namespace TTC_Server
         //3
         public static void RoomCreate(int _fromClient, Packet _packet)
         {
-
             int _roomId = Util.GetEmptyRoomId();
             bool isJoin = false;
 
@@ -77,7 +76,9 @@ namespace TTC_Server
             {
                 foreach(KeyValuePair<int, Room> item in Server.rooms)
                 {
-                    if (item.Value.isStart == true)
+                    if (item.Value.isPrivate)
+                        continue;
+                    if (item.Value.isStart)
                         continue;
                     if (item.Value.curPlayerCount == 0)
                         continue;
@@ -90,6 +91,20 @@ namespace TTC_Server
                 ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
                 return;
             }
+
+            if (Server.rooms[_roomId].isPrivate)
+            {
+                bool _isPrivate = _packet.ReadBool();
+                string _password = _packet.ReadString();
+
+                if (_isPrivate == false || _password != Server.rooms[_roomId].password)
+                {
+                    isJoin = false;
+                    ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
+                    return;
+                }
+            }
+          
             isJoin = Server.rooms[_roomId].JoinPlayer(_fromClient);
             ServerSend.SendRoomJoinStatus(_fromClient, isJoin);
             return;
@@ -101,6 +116,8 @@ namespace TTC_Server
             string _msg = _packet.ReadString();
             if (_msg.Length < 1)
                 return;
+            if (Server.clients[_fromClient].joinedRoomId != 0)
+                return;
             ServerSend.LobbyChatMessage(_fromClient, _msg);
             return;
         }
@@ -110,6 +127,8 @@ namespace TTC_Server
         {
             string _msg = _packet.ReadString();
             if (_msg.Length < 1)
+                return;
+            if (Server.clients[_fromClient].joinedRoomId == 0)
                 return;
             ServerSend.RoomChatMessage(_fromClient, _msg);
             return;
