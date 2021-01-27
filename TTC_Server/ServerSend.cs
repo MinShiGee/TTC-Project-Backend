@@ -26,7 +26,7 @@ namespace TTC_Server
 
             _packet.WriteLength();
             int roomMaxPlayers = Server.rooms[_roomId].maxPlayerCount;
-            var roomPlayers = Server.rooms[_roomId].GetRoomPlayers();
+            var roomPlayers = Server.rooms[_roomId].GetRoomPlayers(); 
 
             for (int i = 1; i <= roomMaxPlayers; i++)
             {

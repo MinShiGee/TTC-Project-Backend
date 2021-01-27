@@ -18,7 +18,7 @@ namespace TTC_Server
             Thread lobbyThread = new Thread(new ThreadStart(LobbyThread));
             lobbyThread.Start();
 
-            Server.Start(Constants.MAXSERVERPLAYER, Constants.MAXROOMS, ServerInfo.PORT);
+            Server.Start(Constants.MAXSERVERPLAYER, Constants.MAXROOMS, Constants.PORT);
 
             string _input;
             do
@@ -32,6 +32,7 @@ namespace TTC_Server
                         string _msg = String.Empty;
                         for (int i = 1; i < _str.Length; i++)
                             _msg += _str[i] + " ";
+                        
                         ServerSend.LobbyServerMessage(_msg);
                         break;
 

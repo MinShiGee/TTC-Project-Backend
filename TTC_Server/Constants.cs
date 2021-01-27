@@ -7,6 +7,8 @@ namespace TTC_Server
     class Constants
     {
         public const string SERVERNAME = "TTC-GameServer";
+        public const int PORT = 713;
+        public const string DATASERVERIP = "https://localhost:5001/";
 
         public const int MAXSERVERPLAYER = 1500;
         public const int MAXROOMS = 500;

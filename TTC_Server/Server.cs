@@ -35,6 +35,8 @@ namespace TTC_Server
             udpListener = new UdpClient(Port);
             udpListener.BeginReceive(UDPReceiveCallback, null);
 
+            WebManagerTestMethod();
+
             Console.WriteLine($"Server started on port {Port}.");
         }
 
@@ -133,6 +135,13 @@ namespace TTC_Server
                 { (int)ClientPackets.roomStartGame, ServerHandle.RoomStartGame}
             };
             Console.WriteLine("Initialized packets.");
+        }
+
+        private static async void WebManagerTestMethod()
+        {
+            //await WebManager.CreateDefaultUser("");
+            //await WebManager.GetDefaultUserDto("");
+            return;
         }
     }
 }
