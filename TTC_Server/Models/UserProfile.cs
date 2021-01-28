@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TTC_Server.Models
 {
-    class DefaultUser
+    class UserProfile
     {
         public string Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace TTC_Server.Models
 
         public DateTime CreateTime { get; set; }
 
-        public DefaultUser(string _name)
+        public UserProfile(string _name)
         {
             Id = "";
             Name = _name;

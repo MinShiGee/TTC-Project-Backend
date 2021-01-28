@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using TTC_Server.Models;
 
 namespace TTC_Server
 {
@@ -139,8 +140,14 @@ namespace TTC_Server
 
         private static async void WebManagerTestMethod()
         {
-            //await WebManager.CreateDefaultUser("");
-            //await WebManager.GetDefaultUserDto("");
+
+            var _user = new UserProfile("MinShiGee");
+            //var _user = WebManager.GetUserProfile("MinShiGee");
+
+            //await WebManager.DeleteUserProfile(_user.Result.Id);
+
+            //await WebManager.CreateUserProfile("MinShiGee");
+
             return;
         }
     }

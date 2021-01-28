@@ -15,29 +15,32 @@ namespace TTC_Server
 
         private const string userUrl = "api/users";
 
-        public static List<DefaultUser> GetDefaultUserDataList()
+        #region UserProfile CRUD
+        public static async Task<List<UserProfile>> GetAllUserProfileList()
         {
-            var res = new List<DefaultUser>();
+            var _res = await _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, Constants.DATASERVERIP + $"{userUrl}"));
+            string _apiRes = await _res.Content.ReadAsStringAsync();
 
+            var _users = JsonConvert.DeserializeObject<List<UserProfile>>(_apiRes);
 
-            return res;
+            return _users;
         }
 
-        public static async Task<DefaultUser> GetDefaultUserDto(string _name)
+        public static async Task<UserProfile> GetUserProfile(string _name)
         {
 
             var _res = await _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Get, Constants.DATASERVERIP + $"{userUrl}/getuser/{_name}"));
             string _apiRes = await _res.Content.ReadAsStringAsync();
 
-            var _user = JsonConvert.DeserializeObject<DefaultUser>(_apiRes);
+            var _user = JsonConvert.DeserializeObject<UserProfile>(_apiRes);
 
 
             return _user;
         }
 
-        public static async Task CreateDefaultUser(string _name)
+        public static async Task CreateUserProfile(string _name)
         {
-            var _dto = new DefaultUser(_name);
+            var _dto = new UserProfile(_name);
             var _json = JsonConvert.SerializeObject(_dto);
 
             var _req = new HttpRequestMessage(HttpMethod.Post, Constants.DATASERVERIP + $"{userUrl}")
@@ -46,8 +49,28 @@ namespace TTC_Server
             };
 
             var _res = await _httpClient.SendAsync(_req);
+            Console.WriteLine(_res);
 
             return;
         }
+
+        public static async Task UpdateUserProfile(UserProfile _user)
+        {
+
+            var _json = JsonConvert.SerializeObject(_user);
+            var _req = new HttpRequestMessage(HttpMethod.Put, Constants.DATASERVERIP + $"{userUrl}/{_user.Id}")
+            {
+                Content = new StringContent(_json, Encoding.UTF8, "application/json")
+            };
+            var _res = await _httpClient.SendAsync(_req);
+
+            return;
+        }
+
+        public static async Task DeleteUserProfile(string _id)
+        {
+            var _res = await _httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Delete, Constants.DATASERVERIP + $"{userUrl}/{_id}"));
+        }
+        #endregion
     }
 }
