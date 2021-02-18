@@ -1,4 +1,4 @@
-# TTC-Project-SocketServer (개발 중)
+# TTC-Project-SocketServer
 
 이 프로젝트는 TTC프로젝트의 클라이언트 동기화와 클라이언트와 소통과정에서 여러가지 연산을 수행하는 코드입니다..
 
