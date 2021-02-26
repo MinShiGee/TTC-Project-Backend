@@ -7,7 +7,6 @@
 ## Technique Used
 ```
 Language : C#
-framework : .Net
 ```
 <br/>
 
