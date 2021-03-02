@@ -31,11 +31,3 @@ Language : C#
 4. Lobby에 위치한 Client들에게 RoomList Packet 전송.
 5. API서버와 Profile데이터 송수신.
 ```
-
-## Prerequisites
-
-.... 작성 중....
-
-
-## ETC..
-이 프로젝트의 기본적인 구조에 대한 솔루션은 https://github.com/tom-weiland/tcp-udp-networking 을 참고했습니다.
